@@ -13,3 +13,9 @@ for(var i=0 ; i<list.length ; i++){
     list[i].style.backgroundColor = 'green';
     list[i].style.fontWeight = 'bold'
 }
+
+var i5 = document.getElementsByClassName('newlist');
+i5.style.color = 'red'
+var i5 = document.getElementsByTagName('li');
+i5.style.color = 'red'
+
