@@ -6,16 +6,12 @@ var item = document.getElementsByClassName('title');
 item[0].style.fontWeight = 'bold';
 item[0].style.color = 'green';
 var list = document.getElementsByClassName('list-group-item');
-list[2].style.backgroundColor = 'green';
-list[1].style.fontWeight = 'bold';
+// list[2].style.visibility = 'hidden';
 
-for(var i=0 ; i<list.length ; i++){
-    list[i].style.backgroundColor = 'green';
-    list[i].style.fontWeight = 'bold'
+
+document.querySelectorAll('.list-group-item')[1].style.backgroundColor = 'green';
+var odd =  document.querySelectorAll('li:nth-child(odd)')
+for(var i=0 ; i<odd.length ; i++){
+    odd[i].style.backgroundColor = "grey";
 }
-
-var i5 = document.getElementsByClassName('newlist');
-i5.style.color = 'red'
-var i5 = document.getElementsByTagName('li');
-i5.style.color = 'red'
 
