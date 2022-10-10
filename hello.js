@@ -1,46 +1,45 @@
-// var headerTitle = document.getElementById('header-title');
-// var header = document.getElementById('main-header');
-// // headerTitle.style.borderBottom = 'solid 4px #000';
-// header.style.borderBottom = 'solid 4px #000';
-// var item = document.getElementsByClassName('title');
-// item[0].style.fontWeight = 'bold';
-// item[0].style.color = 'green';
-// var list = document.getElementsByClassName('list-group-item');
-// // list[2].style.visibility = 'hidden';
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
+
+form.addEventListener('submit', addItem);
+itemList.addEventListener('click',removeItem);
+filter.addEventListener('keyup',filterItems);
 
 
-// document.querySelectorAll('.list-group-item')[1].style.backgroundColor = 'green';
-// var odd =  document.querySelectorAll('li:nth-child(odd)')
-// for(var i=0 ; i<odd.length ; i++){
-//     odd[i].style.backgroundColor = "grey";
-// }
+function addItem(e){
 
+    e.preventDefault();
 
-// parentNode and parentElement
-var itemList = document.querySelector('#items');
-itemList.parentNode.style.backgroundColor = "grey";
-//lastchildNodes
-itemList.lastElementChild.textContent = "list 4";
+    var newItem = document.getElementById('item').value;
+    var li = document.createElement('li');
+    li.className = 'list-group-item';
+    li.appendChild(document.createTextNode(newItem));
+    var deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+    deleteBtn.appendChild(document.createTextNode('X'));
+    li.appendChild(deleteBtn);
+    itemList.appendChild(li);
+     
+}
+function removeItem(e){
+    if(e.target.classList.contains('delete')){
+        if(confirm('Are you Sure?')){
+            var li = e.target.parentElement;
+            itemList.removeChild(li);
+        }
+    }
+}
 
-//lastChild
-itemList.lastChild.textContent = "hello"
-
-//nextSibling
-itemList.nextSibling.textContent = "goodbye"
-
-//previousSibling
-itemList.previousElementSibling.style.color = 'green';
-
-//createElement
-var newDiv = document.createElement('div');
-newDiv.className = 'hello';
-newDiv.id = "hello1";
-newDiv.setAttribute('title','hello div');
-var newDivText = document.createTextNode('hello world');
-newDiv.appendChild(newDivText);
-console.log(newDiv)
-var container = document.querySelector('header .container');
-var h1 = document.querySelector('header h1');
-container.insertBefore(newDiv, h1);
-
-
+function filterItems(e){
+    var text = e.target.value.toLowerCase();
+    var items = itemList.getElementsByTagName('li');
+    Array.from(items).forEach(function(item){
+        var itemName = item.firstChild.textContent;
+        if(itemName.toLowerCase().indexOf(text)!=-1){
+            item.style.display = 'block';
+        }else{
+            item.style.display = 'none';
+        }
+    })
+}
